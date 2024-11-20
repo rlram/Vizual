@@ -8,6 +8,8 @@
         <item name="colorOnSecondary">@color/white</item>
 
         <item name="android:windowIsTranslucent">true</item>
+
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Theme.Vizual" parent="Base.Theme.Vizual" />
