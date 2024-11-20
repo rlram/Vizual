@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Vizual</string>
+    <string name="unleash_the_power_of_n_conversations">Unleash the Power of \nConversations!</string>
+    <string name="the_ultimate_video_calling_app_designed_to_n_enhance_your_communication_n_experience">The ultimate video calling app designed to \nenhance your communication \nexperience</string>
+    <string name="btn_continue">Continue</string>
 </resources>
