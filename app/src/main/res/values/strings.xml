@@ -3,4 +3,18 @@
     <string name="unleash_the_power_of_n_conversations">Unleash the Power of \nConversations!</string>
     <string name="the_ultimate_video_calling_app_designed_to_n_enhance_your_communication_n_experience">The ultimate video calling app designed to \nenhance your communication \nexperience</string>
     <string name="btn_continue">Continue</string>
+    <string name="arrow_back">Arrow Back</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="image_mobile">Image Mobile</string>
+    <string name="enter_mobile_number">Enter mobile number</string>
+    <string name="otp_will_sent_to_this_no">OTP will sent to this no</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="get_otp">GET OTP</string>
+    <string name="verify_proceed"><![CDATA[VERIFY & PROCEED]]></string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="enter_confirm_password">Enter confirm password</string>
 </resources>
