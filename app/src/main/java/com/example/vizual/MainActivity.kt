@@ -27,7 +27,6 @@ import com.google.firebase.database.ValueEventListener
 class MainActivity : AppCompatActivity() {
     private lateinit var tvUserName: TextView
     private lateinit var btnSignOut: ImageButton
-    private lateinit var searchView: SearchView
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var tvNoContact: TextView
@@ -51,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         }
         tvUserName = findViewById(R.id.tvUserName)
         btnSignOut = findViewById(R.id.btnSignOut)
-        searchView = findViewById(R.id.searchView)
         recyclerView = findViewById(R.id.recyclerView)
         progressBar = findViewById(R.id.progressBarMain)
         tvNoContact = findViewById(R.id.tvNoContacts)
