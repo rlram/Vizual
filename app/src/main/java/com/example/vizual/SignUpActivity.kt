@@ -115,11 +115,14 @@ class SignUpActivity : AppCompatActivity() {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) {task ->
                 if (task.isSuccessful) {
-                    databaseReference.child(firebaseAuth.uid.toString()).child("name").setValue(name)
-                    databaseReference.child(firebaseAuth.uid.toString()).child("email").setValue(email)
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    val id = System.currentTimeMillis().toString()
+                    val user = User(id, name, email)
+                    databaseReference.child(id).setValue(user)
+                        .addOnSuccessListener {
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
                 } else {
                     Toast.makeText(
                         applicationContext,

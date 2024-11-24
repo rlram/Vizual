@@ -31,16 +31,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var tvNoContact: TextView
-    private lateinit var btnCreate: Button
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: ContactAdapter
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseDatabase: FirebaseDatabase
-    private lateinit var databaseReferenceUser: DatabaseReference
-    private lateinit var databaseReferenceContact: DatabaseReference
+    private lateinit var databaseReference: DatabaseReference
 
-    private val contactList = ArrayList<Contact>()
+    private val contactList = ArrayList<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,39 +55,30 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         progressBar = findViewById(R.id.progressBarMain)
         tvNoContact = findViewById(R.id.tvNoContacts)
-        btnCreate = findViewById(R.id.btnCreateContact)
 
         firebaseAuth = Firebase.auth
         firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReferenceUser = firebaseDatabase.getReference("users")
-        databaseReferenceContact = firebaseDatabase.getReference("contacts")
+        databaseReference = firebaseDatabase.getReference("users")
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = linearLayoutManager
         adapter = ContactAdapter(contactList)
         recyclerView.adapter = adapter
 
-        databaseReferenceUser.child(firebaseAuth.uid.toString()).get()
-            .addOnSuccessListener {
-                tvUserName.text = it.child("name").value.toString()
-            }
 
-        databaseReferenceContact.addValueEventListener(object : ValueEventListener{
+        databaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     progressBar.visibility = View.GONE
                     for (item in snapshot.children) {
-                        if (item.child("uid").value.toString() == firebaseAuth.currentUser?.uid.toString()) {
-                            val id = item.child("id").value.toString()
-                            val personName = item.child("personName").value.toString()
-                            val phone = item.child("phone").value.toString()
-                            val uId = item.child("uid").value.toString()
+                        val id = item.child("id").value.toString()
+                        val name = item.child("name").value.toString()
+                        val userName = item.child("userName").value.toString()
 
-                            contactList.add(Contact(id, personName, phone, uId))
-                            adapter.notifyItemInserted(contactList.size)
-                        } else {
-                            tvNoContact.visibility = View.VISIBLE
-                        }
+                        tvUserName.text = name
+
+                        contactList.add(User(id, name, userName))
+                        adapter.notifyItemInserted(contactList.size)
                     }
                 } else {
                     progressBar.visibility = View.GONE
@@ -111,12 +100,6 @@ class MainActivity : AppCompatActivity() {
         btnSignOut.setOnClickListener {
             firebaseAuth.signOut()
             val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        btnCreate.setOnClickListener {
-            val intent = Intent(this, CreateContactActivity::class.java)
             startActivity(intent)
             finish()
         }

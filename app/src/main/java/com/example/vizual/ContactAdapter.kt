@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ContactAdapter(private val list: ArrayList<Contact>): RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+class ContactAdapter(private val list: ArrayList<User>): RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val tvPersonName: TextView = view.findViewById(R.id.tvPersonName)
-        val tvPhone: TextView = view.findViewById(R.id.tvPhone)
+        val tvUserName: TextView = view.findViewById(R.id.tvUserName)
         val ivVideoCall: ImageView = view.findViewById(R.id.ivVideoCall)
     }
 
@@ -25,8 +25,8 @@ class ContactAdapter(private val list: ArrayList<Contact>): RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
-        holder.tvPersonName.text = item.personName
-        holder.tvPhone.text = item.phone
+        holder.tvPersonName.text = item.name
+        holder.tvUserName.text = item.userName
 
     }
 }
