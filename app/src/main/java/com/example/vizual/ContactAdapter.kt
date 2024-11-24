@@ -3,15 +3,17 @@ package com.example.vizual
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton
+import com.zegocloud.uikit.service.defines.ZegoUIKitUser
+import java.util.Collections
 
 class ContactAdapter(private val list: ArrayList<User>): RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val tvPersonName: TextView = view.findViewById(R.id.tvPersonName)
         val tvUserName: TextView = view.findViewById(R.id.tvUserName)
-        val ivVideoCall: ImageView = view.findViewById(R.id.ivVideoCall)
+        val btnVideoCall: ZegoSendCallInvitationButton = view.findViewById(R.id.btnVideoCall)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,5 +30,8 @@ class ContactAdapter(private val list: ArrayList<User>): RecyclerView.Adapter<Co
         holder.tvPersonName.text = item.name
         holder.tvUserName.text = item.userName
 
+        holder.btnVideoCall.setIsVideoCall(true)
+        holder.btnVideoCall.resourceID = "zego_uikit_call"
+        holder.btnVideoCall.setInvitees(Collections.singletonList(ZegoUIKitUser(item.userName, item.userName)))
     }
 }

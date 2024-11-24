@@ -33,12 +33,9 @@
             android:layout_marginTop="5dp"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/ivVideoCall"
+    <com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton
+        android:id="@+id/btnVideoCall"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:contentDescription="@string/video_call_icon"
-        app:srcCompat="@drawable/icon_video_call"
-        app:tint="?attr/colorPrimary" />
+        android:layout_gravity="center"/>
 </LinearLayout>

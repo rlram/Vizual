@@ -21,6 +21,8 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.zegocloud.uikit.prebuilt.call.ZegoUIKitPrebuiltCallService
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationConfig
 import java.util.concurrent.TimeUnit
 
 class SignUpActivity : AppCompatActivity() {
@@ -115,10 +117,12 @@ class SignUpActivity : AppCompatActivity() {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) {task ->
                 if (task.isSuccessful) {
-                    val id = System.currentTimeMillis().toString()
+                    val id = firebaseAuth.currentUser?.uid.toString()
                     val user = User(id, name, email)
                     databaseReference.child(id).setValue(user)
                         .addOnSuccessListener {
+                            val config = ZegoUIKitPrebuiltCallInvitationConfig()
+                            ZegoUIKitPrebuiltCallService.init(application, AppConstants.appId, AppConstants.appSign, email, email, config)
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()

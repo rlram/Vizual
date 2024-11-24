@@ -65,6 +65,10 @@ class MainActivity : AppCompatActivity() {
         adapter = ContactAdapter(contactList)
         recyclerView.adapter = adapter
 
+        databaseReference.child(firebaseAuth.currentUser?.uid.toString()).get()
+            .addOnSuccessListener {
+                tvUserName.text = it.child("name").value.toString()
+            }
 
         databaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -74,8 +78,6 @@ class MainActivity : AppCompatActivity() {
                         val id = item.child("id").value.toString()
                         val name = item.child("name").value.toString()
                         val userName = item.child("userName").value.toString()
-
-                        tvUserName.text = name
 
                         contactList.add(User(id, name, userName))
                         adapter.notifyItemInserted(contactList.size)
